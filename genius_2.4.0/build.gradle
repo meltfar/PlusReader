@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('genius_2.4.0.aar'))

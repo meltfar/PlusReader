@@ -1,0 +1,275 @@
+[
+    {
+        "outputFile": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 53,
+                    "endOffset": 104
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\attrs.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 72,
+                        "endColumn": 54,
+                        "endOffset": 122
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 109,
+                    "endColumn": 57,
+                    "endOffset": 162
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\colors.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 66,
+                        "endColumn": 57,
+                        "endOffset": 119
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 1225,
+                    "endColumn": 49,
+                    "endOffset": 1270
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 549,
+                        "endColumn": 50,
+                        "endOffset": 595
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 1275,
+                    "endColumn": 38,
+                    "endOffset": 1309
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 79,
+                        "endColumn": 39,
+                        "endOffset": 114
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 1314,
+                    "endColumn": 35,
+                    "endOffset": 1345
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 179,
+                        "endColumn": 36,
+                        "endOffset": 211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 1350,
+                    "endColumn": 40,
+                    "endOffset": 1386
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 263,
+                        "endColumn": 41,
+                        "endOffset": 300
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 1391,
+                    "endColumn": 39,
+                    "endOffset": 1426
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 424,
+                        "endColumn": 40,
+                        "endOffset": 460
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 1431,
+                    "endColumn": 37,
+                    "endOffset": 1464
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 349,
+                        "endColumn": 38,
+                        "endOffset": 383
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 1469,
+                    "endColumn": 45,
+                    "endOffset": 1510
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 601,
+                        "endColumn": 46,
+                        "endOffset": 643
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 1515,
+                    "endColumn": 45,
+                    "endOffset": 1556
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\ids.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 649,
+                        "endColumn": 46,
+                        "endOffset": 691
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1561,
+                    "endColumn": 69,
+                    "endOffset": 1626
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 126,
+                        "endColumn": 69,
+                        "endOffset": 191
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1631,
+                    "endColumn": 68,
+                    "endOffset": 1695
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 68,
+                        "endOffset": 120
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1700,
+                    "endColumn": 26,
+                    "endOffset": 1722
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 17,
+                        "endColumn": 27,
+                        "endOffset": 40
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1727,
+                    "endLine": 21,
+                    "endColumn": 12,
+                    "endOffset": 2123
+                },
+                "from": {
+                    "file": "D:\\Programming\\Java\\ASProjects\\PlusReader\\menudrawer\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 91,
+                        "endLine": 10,
+                        "endColumn": 12,
+                        "endOffset": 487
+                    }
+                }
+            }
+        ]
+    }
+]
