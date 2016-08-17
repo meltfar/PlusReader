@@ -18,12 +18,12 @@ public class ViewTools {
     /**
      * 通过给定的DP值，返回PX值
      *
-     * @param px
-     * @param dm
-     * @return
+     * @param dip 要转换的DIP值
+     * @param dm 显示参数
+     * @return 结果
      */
-    public static int dip2px(int px, DisplayMetrics dm) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, dm);
+    public static int dip2px(int dip, DisplayMetrics dm) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, dm);
     }
 
     /**

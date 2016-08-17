@@ -11,4 +11,6 @@ package com.zhouplus.plusreader.utils;
 public class PlusConstants {
     public static final String UPDATE_URL = "http://www.zhouplus.com/apk/plusreader/update.json";
     public static final String PREFERENCE_NAME = "plus-config";
+
+    public static final String DATABASE_NAME = "plus-data.db";
 }

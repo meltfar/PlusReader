@@ -1,10 +1,12 @@
 package com.zhouplus.plusreader.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +28,8 @@ public class SplashActivity extends AppCompatActivity {
     private Handler handler;
     private final int MSG_NET_ERROR = 2;
     private final int MSG_ENTER_MAIN = 1;
+    // 网络活动是否已经完成
+    private boolean bNetComplete = false;
 
     private final String NEW_VCODE = "updateVersionCode";
     private final String NEW_VNAME = "updateVersionName";
@@ -52,11 +56,11 @@ public class SplashActivity extends AppCompatActivity {
                     //网络错误
                     case MSG_NET_ERROR:
                         Toast.makeText(SplashActivity.this,
-                                (String) msg.obj, Toast.LENGTH_LONG).show();
-                        enterMain();
+                                "出错啦！\n" + msg.obj, Toast.LENGTH_LONG).show();
+                        bNetComplete = true;
                         break;
                     case MSG_ENTER_MAIN:
-                        enterMain();
+                        bNetComplete = true;
                         break;
                     default:
                         break;
@@ -66,13 +70,10 @@ public class SplashActivity extends AppCompatActivity {
         });
         //检查更新
         checkUpdate();
+        //准备进入主界面
+        enterMain();
     }
 
-    /**
-     * 进入主界面
-     */
-    private void enterMain() {
-    }
 
     /**
      * 检查更新
@@ -88,7 +89,6 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable throwable, boolean b) {
-                // TODO 发信息解决这些问题
                 Message msg = handler.obtainMessage();
                 msg.obj = throwable.toString();
                 msg.what = MSG_NET_ERROR;
@@ -118,6 +118,8 @@ public class SplashActivity extends AppCompatActivity {
 
         if (comparedUpdate(updateInfo)) {
             askForUpdate(updateInfo);
+        } else {
+            bNetComplete = true;
         }
     }
 
@@ -157,7 +159,7 @@ public class SplashActivity extends AppCompatActivity {
         if (updateInfo.versionCode == Integer.parseInt(PreferenceManager.getPreferenceString(
                 SplashActivity.this, NEW_VCODE, "" + currentVersionCode))) {
             if (PreferenceManager.getPreferenceBoolean(SplashActivity.this, IGNORE_UPDATE, false)) {
-                // TODO 这个升级版本已经忽略，直接进入Main
+                bNetComplete = true;
                 return;
             }
         }
@@ -187,10 +189,29 @@ public class SplashActivity extends AppCompatActivity {
     //取消并忽略更新
     private void ignoreUpdate() {
         PreferenceManager.setPreferenceBoolean(this, IGNORE_UPDATE, true);
+        bNetComplete = true;
     }
 
     //更新
     private void Update(String url) {
         System.out.println("更新啦！！\n下载： " + url);
+    }
+
+    /**
+     * 进入主界面
+     */
+    private void enterMain() {
+        new Thread() {
+            @Override
+            public void run() {
+                SystemClock.sleep(2000);
+                // 如果网络活动没有完成，我们就等待
+                while (!bNetComplete) {
+                    SystemClock.sleep(200);
+                }
+                startActivity(new Intent(SplashActivity.this, ShelfActivity.class));
+                finish();
+            }
+        }.start();
     }
 }
