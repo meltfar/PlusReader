@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="菜单"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="30sp" />
+
+    <net.qiujuer.genius.widget.GeniusButton
+        android:id="@+id/test_btn_addBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Add A Book"
+        app:g_cornerRadius="5dp"
+        app:g_theme="@array/ScubaBlue" />
+
+    <net.qiujuer.genius.widget.GeniusButton
+        android:id="@+id/test_btn_delBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Delete A Book"
+        app:g_cornerRadius="5dp"
+        app:g_theme="@array/ScubaBlue" />
+
+</LinearLayout>

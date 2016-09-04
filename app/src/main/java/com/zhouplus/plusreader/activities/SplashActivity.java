@@ -10,11 +10,13 @@ import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zhouplus.plusreader.R;
 import com.zhouplus.plusreader.domains.forJson.UpdateInfo;
+import com.zhouplus.plusreader.fragments.ShelfFragment;
 import com.zhouplus.plusreader.utils.PlusConstants;
 import com.zhouplus.plusreader.utils.PreferenceManager;
 import com.zhouplus.plusreader.utils.ViewTools;
@@ -28,8 +30,11 @@ public class SplashActivity extends AppCompatActivity {
     private Handler handler;
     private final int MSG_NET_ERROR = 2;
     private final int MSG_ENTER_MAIN = 1;
+    private final int MSG_ENTER_GUIDE = 0;
     // 网络活动是否已经完成
     private boolean bNetComplete = false;
+
+    //TODO 应该有个GuideActivity
 
     private final String NEW_VCODE = "updateVersionCode";
     private final String NEW_VNAME = "updateVersionName";
@@ -55,10 +60,7 @@ public class SplashActivity extends AppCompatActivity {
                 switch (msg.what) {
                     //网络错误
                     case MSG_NET_ERROR:
-                        Toast.makeText(SplashActivity.this,
-                                "出错啦！\n" + msg.obj, Toast.LENGTH_LONG).show();
-                        bNetComplete = true;
-                        break;
+                        Log.e("SplashActivity", "网络错误\n" + msg.obj);
                     case MSG_ENTER_MAIN:
                         bNetComplete = true;
                         break;
@@ -209,7 +211,7 @@ public class SplashActivity extends AppCompatActivity {
                 while (!bNetComplete) {
                     SystemClock.sleep(200);
                 }
-                startActivity(new Intent(SplashActivity.this, ShelfActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
         }.start();

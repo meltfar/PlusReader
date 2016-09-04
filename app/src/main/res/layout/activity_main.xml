@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/rg_mainTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <com.zhouplus.plusreader.views.TabItem xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab_shelf"
+            style="@style/MainRadioTab"
+            android:drawableTop="@drawable/item_tab_shelf"
+            android:text="书架"
+            app:drawableHeight="30dp"
+            app:drawableWidth="30dp" />
+
+        <com.zhouplus.plusreader.views.TabItem xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab_bookshop"
+            style="@style/MainRadioTab"
+            android:drawableTop="@drawable/item_tab_bookshop"
+            android:text="发现"
+            app:drawableHeight="30dp"
+            app:drawableWidth="30dp" />
+
+        <com.zhouplus.plusreader.views.TabItem xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab_feature"
+            style="@style/MainRadioTab"
+            android:drawableTop="@drawable/item_tab_feature"
+            android:text="功能"
+            app:drawableHeight="30dp"
+            app:drawableWidth="30dp" />
+
+        <com.zhouplus.plusreader.views.TabItem xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab_mine"
+            style="@style/MainRadioTab"
+            android:drawableTop="@drawable/item_tab_mine"
+            android:text="我的"
+            app:drawableHeight="30dp"
+            app:drawableWidth="30dp" />
+
+    </RadioGroup>
+
+    <View
+        android:id="@+id/v_divideLine"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@+id/rg_mainTab"
+        android:background="@android:color/darker_gray" />
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/v_divideLine" />
+</RelativeLayout>

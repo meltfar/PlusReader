@@ -28,14 +28,23 @@ public class DatabaseCreator extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         System.out.println("数据库创建");
-        //开始创建数据库
+        //创建书本信息数据库
         db.execSQL("CREATE TABLE IF NOT EXISTS `bookshelf` ( \n" +
-                "`id` INTEGER unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT, \n" +
+                "`id` INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
                 "`name` TEXT NOT NULL, \n" +
                 "`description` TEXT, \n" +
                 "`add_date` TEXT NOT NULL, \n" +
                 "`length` INTEGER unsigned NOT NULL, \n" +
                 "`path` TEXT NOT NULL \n" +
+                ")");
+        // 创建书签数据库
+        db.execSQL("CREATE TABLE IF NOT EXISTS `bookmark` (\n" +
+                "`id` INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "`name` TEXT NOT NULL, \n" +
+                "`start` INTEGER unsigned NOT NULL,\n" +
+                "`end` INTEGER unsigned NOT NULL,\n" +
+                "`path` TEXT NOT NULL,\n" +
+                "`bookid` INTEGER\n" +
                 ")");
     }
 
