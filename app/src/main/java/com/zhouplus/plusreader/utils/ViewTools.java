@@ -19,7 +19,7 @@ public class ViewTools {
      * 通过给定的DP值，返回PX值
      *
      * @param dip 要转换的DIP值
-     * @param dm 显示参数
+     * @param dm  显示参数
      * @return 结果
      */
     public static int dip2px(int dip, DisplayMetrics dm) {
@@ -51,4 +51,5 @@ public class ViewTools {
         builder.setPositiveButton("确定", positiveListener);
         builder.create().show();
     }
+
 }

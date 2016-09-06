@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--<color name="readingBackground_net">#080C10</color>-->
+    <!--<color name="readingForeground_net">#424952</color>-->
+    <!--<color name="readingLink_net">#294563</color>-->
+    <color name="readingBackground_net">#323536</color>
+    <color name="readingForeground_net">#999999</color>
+
+    <color name="readingBackground_day1">#F6F4EC</color>
+    <color name="readingBackground_day2">#E6F0E6</color>
+    <color name="readingForeground_day">#333333</color>
 </resources>

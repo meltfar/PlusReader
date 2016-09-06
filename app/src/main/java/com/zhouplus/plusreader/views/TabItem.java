@@ -124,4 +124,5 @@ public class TabItem extends RadioButton {
                 height, matrix, true);
         return new BitmapDrawable(getResources(), resizedBitmap);
     }
+
 }

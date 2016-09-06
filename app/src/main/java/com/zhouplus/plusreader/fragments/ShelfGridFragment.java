@@ -1,5 +1,6 @@
 package com.zhouplus.plusreader.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ListAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhouplus.plusreader.R;
+import com.zhouplus.plusreader.activities.ReadingActivity;
+import com.zhouplus.plusreader.domains.PlusBook;
 
 /**
  * Created by zhouplus
@@ -26,21 +30,28 @@ import com.zhouplus.plusreader.R;
 public class ShelfGridFragment extends android.support.v4.app.Fragment {
     public GridView gv_shelf;
     View baseView;
-    ListAdapter adapter;
-    private Handler shelfGridHandler;
+    ShelfFragment.MyAdapter adapter;
+    public Handler shelfGridHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    initGridView();
+                    break;
+                case 2:
+                    if (adapter != null)
+                        adapter.notifyDataSetChanged();
+                    break;
+            }
+            return false;
+        }
+    });
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseView = View.inflate(getActivity(), R.layout.item_gridview_shelf, null);
         gv_shelf = (GridView) baseView.findViewById(R.id.gv_shelf);
-        shelfGridHandler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                initGridView();
-                return false;
-            }
-        });
     }
 
     @Nullable
@@ -53,25 +64,33 @@ public class ShelfGridFragment extends android.support.v4.app.Fragment {
                 while (adapter == null)
                     SystemClock.sleep(100);
                 //不知道是不是因为这里的运行先后问题，导致了崩溃，所以换成发信息方法来试试
-                shelfGridHandler.sendEmptyMessage(0);
+                shelfGridHandler.sendEmptyMessage(1);
             }
         }.start();
         return baseView;
     }
 
+    public void refreshShelf() {
+        shelfGridHandler.sendEmptyMessage(2);
+    }
+
     private void initGridView() {
         gv_shelf.setAdapter(adapter);
-        //// TODO: 2016/9/4 打开相应的小说 ，这就是阅读器的核心部分了
         gv_shelf.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tv_bookName, tv_readPercent;
-                tv_bookName = (TextView) view.findViewById(R.id.tv_bookName);
-                tv_readPercent = (TextView) view.findViewById(R.id.tv_readPercent);
-                System.out.println("item click on" + " " + position);
-                System.out.println(tv_bookName.getText() + "    " + tv_readPercent.getText());
+//                TextView tv_bookName, tv_readPercent;
+                LinearLayout ll_book;
+//                tv_bookName = (TextView) view.findViewById(R.id.tv_bookName);
+//                tv_readPercent = (TextView) view.findViewById(R.id.tv_readPercent);
+                ll_book = (LinearLayout) view.findViewById(R.id.ll_bookView);
+                Intent intent = new Intent(getActivity(), ReadingActivity.class);
+                intent.putExtra("BookInfo", (PlusBook) ll_book.getTag());
+//                startActivity(intent);
+                startActivityForResult(intent, 555);
             }
         });
+
 
         gv_shelf.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -89,7 +108,7 @@ public class ShelfGridFragment extends android.support.v4.app.Fragment {
      *
      * @param la 适配器
      */
-    public void setGridAdapter(ListAdapter la) {
-        adapter = la;
+    public void setGridAdapter(BaseAdapter la) {
+        adapter = (ShelfFragment.MyAdapter) la;
     }
 }

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/genius_2.4.0/genius_2.4.0.iml" filepath="$PROJECT_DIR$/genius_2.4.0/genius_2.4.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/gson-2.7/gson-2.7.iml" filepath="$PROJECT_DIR$/gson-2.7/gson-2.7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/juniversalchardet-1.0.3/juniversalchardet-1.0.3.iml" filepath="$PROJECT_DIR$/juniversalchardet-1.0.3/juniversalchardet-1.0.3.iml" />
       <module fileurl="file://$PROJECT_DIR$/menudrawer/menudrawer.iml" filepath="$PROJECT_DIR$/menudrawer/menudrawer.iml" />
       <module fileurl="file://$PROJECT_DIR$/xutils-3.3.36/xutils-3.3.36.iml" filepath="$PROJECT_DIR$/xutils-3.3.36/xutils-3.3.36.iml" />
     </modules>

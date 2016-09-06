@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_readingRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhouplus.plusreader.activities.ReadingActivity">
+
+    <TextView
+        android:id="@+id/tv_readingTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:text="燃烧吧"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <com.zhouplus.plusreader.views.ReadingView
+        android:id="@+id/rv_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1" />
+
+    <RelativeLayout
+        android:id="@+id/rl_statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+
+        <TextView
+            android:id="@+id/tv_readingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:text="10:58"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_readingPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="36.8%"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

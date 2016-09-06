@@ -13,6 +13,7 @@ import com.zhouplus.plusreader.R;
 import com.zhouplus.plusreader.databases.DatabaseManager;
 import com.zhouplus.plusreader.domains.PlusBook;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class ShelfFragment extends BaseFragment {
             @Override
             public void OnDataTransfered(List<PlusBook> bookList) {
                 books = bookList;
-                gv_adapter.notifyDataSetChanged();
-                System.out.println(books.size());
+                gridFragment.refreshShelf();
             }
         });
 
@@ -101,6 +101,8 @@ public class ShelfFragment extends BaseFragment {
             TextView tv_bookName, tv_readPercent;
             LinearLayout ll_bookView;
 
+            PlusBook pb = books.get(position);
+
             if (convertView == null) {
                 convertView = View.inflate(mainActivity, R.layout.item_grid_book, null);
             }
@@ -109,10 +111,13 @@ public class ShelfFragment extends BaseFragment {
             tv_bookName = (TextView) convertView.findViewById(R.id.tv_bookName);
             tv_readPercent = (TextView) convertView.findViewById(R.id.tv_readPercent);
             ll_bookView = (LinearLayout) convertView.findViewById(R.id.ll_bookView);
-            tv_bookName.setText(books.get(position).name);
-            //// TODO: 2016/9/4 这个数值应该是小说当前阅读进度
-            String str = "12.2%";
-            tv_readPercent.setText(str);
+            tv_bookName.setText(pb.name);
+            float p = (float) pb.read_begin / (float) pb.length * 100;
+            DecimalFormat strPercent = new DecimalFormat("#0.0");
+            String s = strPercent.format(p) + "%";
+            tv_readPercent.setText(s);
+
+            ll_bookView.setTag(pb);
 
             return convertView;
         }

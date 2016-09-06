@@ -27,4 +27,5 @@ dependencies {
     compile project(':gson-2.7')
     compile project(':menudrawer')
     compile project(':genius_2.4.0')
+    compile project(':juniversalchardet-1.0.3')
 }

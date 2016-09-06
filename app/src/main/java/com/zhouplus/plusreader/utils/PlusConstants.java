@@ -19,4 +19,8 @@ public class PlusConstants {
     public static final String FEATURE_TAG = "FragmentFeature";
     public static final String MINE_TAG = "FragmentMine";
 
+//
+//    public static final int READING_PAGE_MARGIN_DIP_LR = 16;
+//    public static final int READING_PAGE_MARGIN_DIP_TOP = 40;
+//    public static final int READING_PAGE_MARGIN_DIP_BOTTOM = 36;
 }

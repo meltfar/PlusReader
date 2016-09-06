@@ -35,7 +35,9 @@ public class DatabaseCreator extends SQLiteOpenHelper {
                 "`description` TEXT, \n" +
                 "`add_date` TEXT NOT NULL, \n" +
                 "`length` INTEGER unsigned NOT NULL, \n" +
-                "`path` TEXT NOT NULL \n" +
+                "`path` TEXT NOT NULL, \n" +
+                "`read_begin` INTEGER unsigned, \n" +
+                "`read_end` INTEGER unsigned " +
                 ")");
         // 创建书签数据库
         db.execSQL("CREATE TABLE IF NOT EXISTS `bookmark` (\n" +
@@ -44,7 +46,7 @@ public class DatabaseCreator extends SQLiteOpenHelper {
                 "`start` INTEGER unsigned NOT NULL,\n" +
                 "`end` INTEGER unsigned NOT NULL,\n" +
                 "`path` TEXT NOT NULL,\n" +
-                "`bookid` INTEGER\n" +
+                "`bookid` INTEGER\n" + //这本书在书本信息数据库中的位置
                 ")");
     }
 

@@ -61,7 +61,10 @@ public class DatabaseManager {
             cv.put("description", desc);
         cv.put("length", bookSize);
         cv.put("path", path);
+        //// TODO: 2016/9/6 解决这个插入以后是时间的问题
         cv.put("add_date", "datetime('now')");
+        cv.put("read_begin", 0);
+        cv.put("read_end", 0);
         return mDatabase.insert(BOOK_TABLE, null, cv) != -1;
     }
 
@@ -89,6 +92,87 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * 通过ID查找书
+     *
+     * @param id iD号（在数据库中的）
+     * @return 书的类，如果没有找到，则返回NULL
+     */
+    public PlusBook findBookById(int id) {
+        Cursor cursor = mDatabase.rawQuery("SELECT id,name,description,add_date," +
+                        "length,path,read_begin,read_end FROM " + BOOK_TABLE + " WHERE id = ?",
+                new String[]{String.valueOf(id)});
+        if (cursor.getCount() <= 0)
+            return null;
+        cursor.moveToNext();
+        PlusBook b = new PlusBook();
+        b.id = cursor.getInt(0);
+        b.name = cursor.getString(1);
+        b.description = cursor.getString(2);
+        b.add_date = cursor.getString(3);
+        b.length = cursor.getInt(4);
+        b.path = cursor.getString(5);
+        b.read_begin = cursor.getInt(6);
+        b.read_end = cursor.getInt(7);
+        cursor.close();
+        return b;
+    }
+
+    /**
+     * 通过路径和名称寻找书
+     *
+     * @param name 书名
+     * @param path 路径
+     * @return 没找到为NULL
+     */
+    public PlusBook findBookByPathName(String name, String path) {
+        Cursor cursor = mDatabase.rawQuery("SELECT id,name,description,add_date," +
+                        "length,path,read_begin,read_end FROM " + BOOK_TABLE
+                        + " WHERE name = ? and path = ?",
+                new String[]{name, path});
+        if (cursor.getCount() <= 0) {
+            return null;
+        }
+        cursor.moveToNext();
+        PlusBook b = new PlusBook();
+        b.id = cursor.getInt(0);
+        b.name = cursor.getString(1);
+        b.description = cursor.getString(2);
+        b.add_date = cursor.getString(3);
+        b.length = cursor.getInt(4);
+        b.path = cursor.getString(5);
+        b.read_begin = cursor.getInt(6);
+        b.read_end = cursor.getInt(7);
+        cursor.close();
+        return b;
+    }
+
+    /**
+     * 修改书的信息
+     *
+     * @param pb 需要修改的书的类
+     * @return 是否成功
+     */
+    public boolean updateBook(PlusBook pb) {
+        if (!TestBook(pb.name, pb.path)) {
+            return false;
+        }
+        ContentValues cv = new ContentValues();
+        cv.put("name", pb.name);
+        if (pb.description != null) {
+            cv.put("description", pb.description);
+        }
+        cv.put("add_date", pb.add_date);
+        cv.put("length", pb.length);
+        cv.put("path", pb.path);
+        cv.put("read_begin", pb.read_begin);
+        cv.put("read_end", pb.read_end);
+
+        return mDatabase.update(BOOK_TABLE, cv, "id = ?",
+                new String[]{String.valueOf(pb.id)}) == 1;
+    }
+
+
     // 删除书信息
     public boolean removeBook(String name, String path) {
         return !forRead &&
@@ -107,7 +191,7 @@ public class DatabaseManager {
         new Thread() {
             @Override
             public void run() {
-                Cursor cursor = mDatabase.rawQuery("SELECT id,name,description,add_date,length,path from "
+                Cursor cursor = mDatabase.rawQuery("SELECT id,name,description,add_date,length,path,read_begin,read_end from "
                         + BOOK_TABLE, null);
                 List<PlusBook> list = new ArrayList<>();
                 while (cursor.moveToNext()) {
@@ -118,6 +202,8 @@ public class DatabaseManager {
                     b.add_date = cursor.getString(3);
                     b.length = cursor.getInt(4);
                     b.path = cursor.getString(5);
+                    b.read_begin = cursor.getInt(6);
+                    b.read_end = cursor.getInt(7);
 
                     list.add(b);
                 }
@@ -127,6 +213,8 @@ public class DatabaseManager {
         }.start();
     }
 
+    ////////////////////////////
+    //以下都是getBooks事件完成后调用的接口
     public void setOnDataTransferedListener(OnDataTransferedListener listener) {
         this.listener = listener;
     }

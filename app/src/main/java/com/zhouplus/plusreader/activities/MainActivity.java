@@ -1,11 +1,14 @@
 package com.zhouplus.plusreader.activities;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -22,6 +25,8 @@ import com.zhouplus.plusreader.views.TabItem;
 
 import net.qiujuer.genius.widget.GeniusButton;
 import net.simonvt.menudrawer.MenuDrawer;
+
+import java.io.File;
 
 /**
  * Created by zhouplus
@@ -104,11 +109,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseManager dm = new DatabaseManager(MainActivity.this, false);
-                dm.addBook("燃烧的岛群", "a book 1", 1000, Environment.getExternalStorageDirectory().getPath()
-                        + "/rsddq.txt");
-                dm.addBook("西西呵呵哈", "a book 2", 3400, Environment.getExternalStorageDirectory().getPath()
-                        + "/xxhhh.txt");
+                String path = Environment.getExternalStorageDirectory().getPath() + "/novel/test.txt";
+                long length = new File(path).length();
+                dm.addBook("test", null, (int) length, path);
                 Toast.makeText(MainActivity.this, "add the book to database", Toast.LENGTH_SHORT).show();
+                ShelfFragment sf = (ShelfFragment) getSupportFragmentManager().findFragmentByTag(PlusConstants.SHELF_TAG);
+                sf.refreshShelf();
             }
         });
 
@@ -117,12 +123,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseManager dm = new DatabaseManager(MainActivity.this, false);
-                dm.removeBook("燃烧的岛群", Environment.getExternalStorageDirectory().getPath()
-                        + "/rsddq.txt");
+                String path = Environment.getExternalStorageDirectory().getPath() + "/novel/test.txt";
+                dm.removeBook("test", path);
                 Toast.makeText(MainActivity.this, "Delete the book from database", Toast.LENGTH_SHORT).show();
+                ShelfFragment sf = (ShelfFragment) getSupportFragmentManager().findFragmentByTag(PlusConstants.SHELF_TAG);
+                sf.refreshShelf();
             }
         });
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ShelfFragment sf = (ShelfFragment) getSupportFragmentManager().findFragmentByTag(PlusConstants.SHELF_TAG);
+        sf.refreshShelf();
+    }
 
+    /////////////////////下方的代码就是为了在按下返回按钮的时候,后台执行
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        super.onBackPressed();
     }
 }
