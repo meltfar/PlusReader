@@ -116,11 +116,17 @@ public class NovelFactory {
             globalBuffer = new RandomAccessFile(f, "r").getChannel()
                     .map(FileChannel.MapMode.READ_ONLY, 0, fileLength);
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
 
         mPageBeginPos = book.read_begin;
         mPageEndPos = book.read_end;
+        //文件合法性校验
+        if (mPageBeginPos > fileLength || mPageEndPos > fileLength) {
+            mPageEndPos = mPageBeginPos = 0;
+        }
+
         //解析文件编码
         if (mEncoding == null) {
             String encoding = analyzeEncoding(f);
@@ -303,9 +309,13 @@ public class NovelFactory {
     /**
      * 获取当前阅读位置
      *
-     * @return
+     * @return int
      */
     public int[] getCurrentPosition() {
         return new int[]{mPageBeginPos, mPageEndPos};
+    }
+
+    public float getCurrentPercent() {
+        return (float) mPageEndPos / (float) fileLength * 100;
     }
 }

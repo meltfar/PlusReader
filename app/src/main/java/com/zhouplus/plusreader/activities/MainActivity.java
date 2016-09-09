@@ -1,21 +1,18 @@
 package com.zhouplus.plusreader.activities;
 
-import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.zhouplus.plusreader.R;
-import com.zhouplus.plusreader.databases.DatabaseManager;
 import com.zhouplus.plusreader.fragments.DiscoverFragment;
 import com.zhouplus.plusreader.fragments.FeatureFragment;
 import com.zhouplus.plusreader.fragments.MineFragment;
@@ -25,8 +22,6 @@ import com.zhouplus.plusreader.views.TabItem;
 
 import net.qiujuer.genius.widget.GeniusButton;
 import net.simonvt.menudrawer.MenuDrawer;
-
-import java.io.File;
 
 /**
  * Created by zhouplus
@@ -43,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     TabItem tab_shelf, tab_bookshop, tab_feature, tab_mine;
     FragmentManager manager;
 
+    private final int REQUEST_CODE_FILE_ACTIVITY = 555;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         menuDrawer.setMenuView(R.layout.activity_menu);
         //设置不可以滑动出菜单
         menuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_NONE);
+
+        //如果系统比较高，可以玩一个沉浸式
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.argb(0xff, 0x3F, 0x51, 0xB5));
+        }
+        //// TODO: 2016/9/8 使用SystemBar 那个插件来完成低版本系统的状态栏
 
 
         // 隐藏ActionBar
@@ -108,35 +111,52 @@ public class MainActivity extends AppCompatActivity {
         test_btn_addBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseManager dm = new DatabaseManager(MainActivity.this, false);
-                String path = Environment.getExternalStorageDirectory().getPath() + "/novel/test.txt";
-                long length = new File(path).length();
-                dm.addBook("test", null, (int) length, path);
-                Toast.makeText(MainActivity.this, "add the book to database", Toast.LENGTH_SHORT).show();
-                ShelfFragment sf = (ShelfFragment) getSupportFragmentManager().findFragmentByTag(PlusConstants.SHELF_TAG);
-                sf.refreshShelf();
-            }
-        });
+//                DatabaseManager dm = new DatabaseManager(MainActivity.this, false);
+//                //// TODO: 2016/9/7
+//                String path = Environment.getExternalStorageDirectory().getPath() + "/Download/girlfriend.txt";
+//                long length = new File(path).length();
+//                System.out.println("adding : " + path);
+//                if (dm.addBook("girlfriend", null, (int) length, path))
+//                    Toast.makeText(MainActivity.this, "add the book to database", Toast.LENGTH_SHORT).show();
+//                refreshShelf();
+                menuDrawer.closeMenu();
+                menuDrawer.setOnDrawerStateChangeListener(new MenuDrawer.OnDrawerStateChangeListener() {
+                    @Override
+                    public void onDrawerStateChange(int oldState, int newState) {
+                        menuDrawer.setOnDrawerStateChangeListener(null);
+                        startActivityForResult(new Intent(MainActivity.this,
+                                OpenFileActivity.class), REQUEST_CODE_FILE_ACTIVITY);
+                    }
 
-        GeniusButton test_btn_delBook = (GeniusButton) menuDrawer.getMenuView().findViewById(R.id.test_btn_delBook);
-        test_btn_delBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseManager dm = new DatabaseManager(MainActivity.this, false);
-                String path = Environment.getExternalStorageDirectory().getPath() + "/novel/test.txt";
-                dm.removeBook("test", path);
-                Toast.makeText(MainActivity.this, "Delete the book from database", Toast.LENGTH_SHORT).show();
-                ShelfFragment sf = (ShelfFragment) getSupportFragmentManager().findFragmentByTag(PlusConstants.SHELF_TAG);
-                sf.refreshShelf();
+                    @Override
+                    public void onDrawerSlide(float openRatio, int offsetPixels) {
+
+                    }
+                });
             }
         });
     }
 
+    /**
+     * 更新书架
+     */
+    private void refreshShelf() {
+        ShelfFragment sf = (ShelfFragment) getSupportFragmentManager().findFragmentByTag(PlusConstants.SHELF_TAG);
+        if (sf != null)
+            sf.refreshShelf();
+    }
+
+    /**
+     * 设置这个用于在阅读小说返回时更新书架
+     *
+     * @param requestCode 请求码
+     * @param resultCode  结果码
+     * @param data        数据
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ShelfFragment sf = (ShelfFragment) getSupportFragmentManager().findFragmentByTag(PlusConstants.SHELF_TAG);
-        sf.refreshShelf();
+        refreshShelf();
     }
 
     /////////////////////下方的代码就是为了在按下返回按钮的时候,后台执行

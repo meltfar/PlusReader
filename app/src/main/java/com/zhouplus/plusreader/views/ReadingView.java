@@ -112,6 +112,11 @@ public class ReadingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //如果在Android Studio的预览模式下，就直接退出，不画
+        if (isInEditMode()) {
+            return;
+        }
+
         // 如果m_lines未被赋值
         if (mContainer == null || mContainer.size() == 0) {
             // 结束位置等于开始位置
@@ -128,7 +133,6 @@ public class ReadingView extends View {
                 // 绘画文字
                 canvas.drawText(line, 0, y, pText);
             }
-
         }
     }
 
@@ -174,4 +178,9 @@ public class ReadingView extends View {
         int[] ps = novelFactory.getCurrentPosition();
         activity.setPercentText((float) ps[0] / (float) relevantBook.length * 100);
     }
+
+    public float getCurrentPercent() {
+        return novelFactory.getCurrentPercent();
+    }
+
 }

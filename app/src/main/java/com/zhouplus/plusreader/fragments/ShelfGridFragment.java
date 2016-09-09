@@ -17,7 +17,10 @@ import android.widget.TextView;
 
 import com.zhouplus.plusreader.R;
 import com.zhouplus.plusreader.activities.ReadingActivity;
+import com.zhouplus.plusreader.databases.DatabaseManager;
 import com.zhouplus.plusreader.domains.PlusBook;
+
+import java.io.File;
 
 /**
  * Created by zhouplus
@@ -84,6 +87,8 @@ public class ShelfGridFragment extends android.support.v4.app.Fragment {
 //                tv_bookName = (TextView) view.findViewById(R.id.tv_bookName);
 //                tv_readPercent = (TextView) view.findViewById(R.id.tv_readPercent);
                 ll_book = (LinearLayout) view.findViewById(R.id.ll_bookView);
+
+                //启动小说阅读页面
                 Intent intent = new Intent(getActivity(), ReadingActivity.class);
                 intent.putExtra("BookInfo", (PlusBook) ll_book.getTag());
 //                startActivity(intent);
@@ -100,7 +105,6 @@ public class ShelfGridFragment extends android.support.v4.app.Fragment {
             }
         });
     }
-
 
     /**
      * 设置GridView要使用的适配器

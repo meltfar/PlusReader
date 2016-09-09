@@ -13,24 +13,17 @@
         android:gravity="center"
         android:text="菜单"
         android:textColor="@android:color/darker_gray"
-        android:textSize="30sp" />
+        android:textSize="22sp" />
 
     <net.qiujuer.genius.widget.GeniusButton
         android:id="@+id/test_btn_addBook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="Add A Book"
+        android:layout_margin="30dp"
+        android:background="@color/colorPrimary"
+        android:text="添加"
+        android:textSize="18sp"
         app:g_cornerRadius="5dp"
-        app:g_theme="@array/ScubaBlue" />
-
-    <net.qiujuer.genius.widget.GeniusButton
-        android:id="@+id/test_btn_delBook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="Delete A Book"
-        app:g_cornerRadius="5dp"
-        app:g_theme="@array/ScubaBlue" />
+        app:g_delayClick="false" />
 
 </LinearLayout>

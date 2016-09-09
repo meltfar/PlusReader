@@ -1,59 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_readingRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.zhouplus.plusreader.activities.ReadingActivity">
 
-    <TextView
-        android:id="@+id/tv_readingTitle"
+    <LinearLayout
+        android:id="@+id/ll_readingRoot"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:maxLength="10"
-        android:maxLines="1"
-        android:text="燃烧吧"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.zhouplus.plusreader.views.ReadingView
-        android:id="@+id/rv_main"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_weight="1" />
+        <TextView
+            android:id="@+id/tv_readingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <com.zhouplus.plusreader.views.ReadingView
+            android:id="@+id/rv_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:id="@+id/rl_statusBar"
+            android:layout_width="match_parent"
+            android:layout_height="36dp">
+
+            <TextView
+                android:id="@+id/tv_readingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_readingBattery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:maxLength="8"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_readingPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_statusBar"
+        android:id="@+id/rl_reading_menu"
         android:layout_width="match_parent"
-        android:layout_height="36dp">
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
 
-        <TextView
-            android:id="@+id/tv_readingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:text="10:58"
-            android:textSize="16sp" />
+        <!--长宽这边不好再改-->
+        <ImageButton
+            android:id="@+id/ib_actionBar_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/color_actionbar_touch"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/action_bar_smart_backs" />
 
-        <TextView
-            android:id="@+id/tv_readingPercent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+        <ImageButton
+            android:id="@+id/ib_actionBar_search"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:text="36.8%"
-            android:textSize="16sp" />
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/color_actionbar_touch"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/action_bar_search" />
+
+        <ImageButton
+            android:id="@+id/ib_actionBar_chapter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/ib_actionBar_search"
+            android:layout_toStartOf="@id/ib_actionBar_search"
+            android:background="@drawable/color_actionbar_touch"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/action_bar_chapter" />
+
+
+        <ImageButton
+            android:id="@+id/ib_actionBar_setting"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/ib_actionBar_chapter"
+            android:layout_toStartOf="@id/ib_actionBar_chapter"
+            android:background="@drawable/color_actionbar_touch"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/action_bar_setting" />
 
     </RelativeLayout>
 
-
-</LinearLayout>
+</FrameLayout>
