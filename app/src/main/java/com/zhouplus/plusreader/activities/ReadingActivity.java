@@ -25,7 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewAnimator;
 
 import com.zhouplus.plusreader.R;
 import com.zhouplus.plusreader.broadcasts.BatteryReceiver;
@@ -59,6 +58,7 @@ public class ReadingActivity extends Activity {
     final int MSG_TIME = 2;
 
     final int REQUEST_CODE_SETTING = 553;
+    final int REQUEST_CODE_CHAPTER = 556;
 
     private boolean bSwitchingMenu = false;
 
@@ -128,7 +128,10 @@ public class ReadingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //// TODO: 2016/9/7 章节窗口
-                System.out.println("open chapter window");
+                Intent i = new Intent(ReadingActivity.this,
+                        ChapterActivity.class);
+                i.putExtra("com.zhouplus.plusreader.chapterPosition", rv_main.getCurrentPosition()[0]);
+                startActivityForResult(i, REQUEST_CODE_CHAPTER);
             }
         });
         //设置窗口
@@ -313,6 +316,17 @@ public class ReadingActivity extends Activity {
     }
 
     /**
+     * 设置章节位置
+     *
+     * @param current 要调到的位置
+     */
+    public void setCurrentPosition(int current) {
+        rv_main.setPosition(current);
+        rv_main.invalidate();
+        setPercentText((float) current / (float) relevantBook.length * 100);
+    }
+
+    /**
      * 如果点击到右侧和下侧,就是下一页,左侧上侧上一页,中间就是菜单
      *
      * @param event 点击事件
@@ -490,6 +504,13 @@ public class ReadingActivity extends Activity {
                     showPopMenu();
                 }
             }
+        } else if (requestCode == REQUEST_CODE_CHAPTER) {
+            showPopMenu();
+//            //直接把返回的结果，当做小说定位的位置，所以如果放弃了改变位置，就返回OK好了（Cancel是0）
+//            if (resultCode != RESULT_OK) {
+//                //设置了章节
+//                System.out.println("Chapter return : " + resultCode);
+//            }
         }
     }
 

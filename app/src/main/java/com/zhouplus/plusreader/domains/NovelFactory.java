@@ -1,5 +1,6 @@
 package com.zhouplus.plusreader.domains;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 
@@ -13,9 +14,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
+import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by zhouplus
@@ -33,6 +40,7 @@ public class NovelFactory {
     int mPageLineCount;//每一页能容纳的行数
     int mTextSize, mLineSpace;
     Paint mPaint;
+    File novelFile;
     //所使用的字符串编码
     public String mEncoding = null;
 
@@ -107,16 +115,60 @@ public class NovelFactory {
         }
     }
 
+    public Vector<String> setPosition(int current) {
+        mPageEndPos = current;
+        if (mPageEndPos == 0) {
+            return nextPage();
+        } else {
+//            nextPage();
+//            prePage();
+            return nextPage();
+        }
+    }
+
+    public LinkedHashMap<Integer, String> analyseChapter() {
+        if (globalBuffer == null) {
+            return null;
+        }
+        LinkedHashMap<Integer, String> chapters = new LinkedHashMap<>();
+        String reg = "(\\t|\\x0B){0,6}[第]([零一二三四五六七八九十百千万0-9]{1,9})[章节回卷部篇](.{0,30})\\s";
+        Pattern p = Pattern.compile(reg);
+
+        byte[] bytes = new byte[globalBuffer.limit()];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = globalBuffer.get(i);
+        }
+        String novel;
+        try {
+            novel = new String(bytes, mEncoding);
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+
+        Matcher m = p.matcher(novel);
+        int lastPos = 0, lastFind = 0;
+        while (m.find()) {
+            try {
+                byte[] str = novel.substring(lastFind, m.start()).getBytes(mEncoding);
+                lastFind = m.start();
+                lastPos += str.length;
+                chapters.put(lastPos, m.group().trim());
+            } catch (UnsupportedEncodingException e) {
+                chapters.put(0, m.group().trim());
+            }
+        }
+        return chapters;
+    }
+
     public boolean openBook(PlusBook book) {
         String path = book.path;
-        File f = new File(path);
+        novelFile = new File(path);
         fileLength = book.length;
 
         try {
-            globalBuffer = new RandomAccessFile(f, "r").getChannel()
+            globalBuffer = new RandomAccessFile(novelFile, "r").getChannel()
                     .map(FileChannel.MapMode.READ_ONLY, 0, fileLength);
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
 
@@ -129,7 +181,7 @@ public class NovelFactory {
 
         //解析文件编码
         if (mEncoding == null) {
-            String encoding = analyzeEncoding(f);
+            String encoding = analyzeEncoding(novelFile);
             if (encoding == null) {
                 mEncoding = "GBK";
             } else {

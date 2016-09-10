@@ -49,6 +49,13 @@ public class BatteryReceiver extends BroadcastReceiver {
                     } else {
                         msg.arg1 = Color.BLACK;
                     }
+                } else if (BatteryManager.BATTERY_STATUS_DISCHARGING == status) {
+                    msg.obj = "电量：" + pf;
+                    if (percent <= 30) {
+                        msg.arg1 = Color.RED;
+                    } else {
+                        msg.arg1 = Color.BLACK;
+                    }
                 } else if (BatteryManager.BATTERY_STATUS_FULL == status) {
                     msg.obj = "电量：100%";
                     msg.arg1 = Color.BLACK;

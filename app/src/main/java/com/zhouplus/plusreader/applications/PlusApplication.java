@@ -2,6 +2,9 @@ package com.zhouplus.plusreader.applications;
 
 import android.app.Application;
 
+import com.zhouplus.plusreader.domains.NovelFactory;
+import com.zhouplus.plusreader.views.ReadingView;
+
 import org.xutils.x;
 
 /**
@@ -13,6 +16,10 @@ import org.xutils.x;
  * Version 1.0
  */
 public class PlusApplication extends Application {
+
+    public NovelFactory novelFactory;
+    public ReadingView readingView;
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -1,6 +1,5 @@
 package com.zhouplus.plusreader.activities;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,7 +20,6 @@ import com.zhouplus.plusreader.R;
 import com.zhouplus.plusreader.databases.DatabaseManager;
 import com.zhouplus.plusreader.domains.FileExplorer;
 import com.zhouplus.plusreader.domains.PlusFile;
-import com.zhouplus.plusreader.utils.ViewTools;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;

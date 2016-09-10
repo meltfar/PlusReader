@@ -28,7 +28,12 @@
         <activity
             android:name=".activities.OpenFileActivity"
             android:label="@string/title_activity_open_file"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ChapterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_chapter"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

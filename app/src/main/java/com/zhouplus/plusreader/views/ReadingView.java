@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.zhouplus.plusreader.activities.ReadingActivity;
+import com.zhouplus.plusreader.applications.PlusApplication;
 import com.zhouplus.plusreader.domains.NovelFactory;
 import com.zhouplus.plusreader.domains.PlusBook;
 import com.zhouplus.plusreader.utils.PreferenceManager;
@@ -77,6 +78,11 @@ public class ReadingView extends View {
                 return false;
             }
             novelFactory.setArguments(mTextSize, mLineSpace, pText);
+            //// TODO: 2016/9/10 先测试一下，把小说管理器的实例同步到Application中，主要是为了在章节选择页面能获取到
+            PlusApplication pa = (PlusApplication) activity.getApplication();
+            pa.novelFactory = novelFactory;
+            pa.readingView = this;
+            //// TODO: 2016/9/10  
             return true;
         } else
             return false;
@@ -156,6 +162,10 @@ public class ReadingView extends View {
 
     public void setPercent(float percent) {
         mContainer = novelFactory.setPercent(percent);
+    }
+
+    public void setPosition(int current) {
+        mContainer = novelFactory.setPosition(current);
     }
 
     /**

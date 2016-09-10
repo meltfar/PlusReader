@@ -20,4 +20,6 @@
     <color name="readingBackground_day1">#F6F4EC</color>
     <color name="readingBackground_day2">#E6F0E6</color>
     <color name="readingForeground_day">#333333</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
