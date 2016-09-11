@@ -131,6 +131,7 @@ public class ReadingActivity extends Activity {
                 Intent i = new Intent(ReadingActivity.this,
                         ChapterActivity.class);
                 i.putExtra("com.zhouplus.plusreader.chapterPosition", rv_main.getCurrentPosition()[0]);
+                i.putExtra("com.zhouplus.plusreader.chapterBookPath", relevantBook.path);
                 startActivityForResult(i, REQUEST_CODE_CHAPTER);
             }
         });

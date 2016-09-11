@@ -55,7 +55,7 @@ public class FileExplorer {
      *
      * @param path dictionary
      */
-    private String checkDictionaryPath(String path) {
+    public String checkDictionaryPath(String path) {
         if (path.charAt(path.length() - 1) != '/') {
             return path + "/";
         } else {
